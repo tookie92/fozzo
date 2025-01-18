@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local"
 import "./globals.css";
+import Header from "@/components/Header";
+import ViewCanvas from "@/components/ViewCanvas";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const alpino = localFont({
+  src: "../public/fonts/Alpino-Variable.woff2",
+  weight: "100 900",
+  display: "swap",
+  variable: "--font-alpino"
+})
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={alpino.variable}>
+      <body className=" overflow-x-hidden bg-yellow-300">
+        <Header/>
+        <main>
+          {children}
+          <ViewCanvas/>
+        </main>
+        <Footer/>
       </body>
     </html>
   );
